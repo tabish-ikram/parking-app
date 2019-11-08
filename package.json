@@ -1,6 +1,9 @@
 {
   "name": "restfull-api-nodejs-starter-kit",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.16.3"
+  },
   "description": "RESTfull Api Node.js",
   "main": "server.js",
   "author": {
