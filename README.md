@@ -1,3 +1,6 @@
+# Parking App Node Server
+
+## Getting Started
 
 Install yarn:
 
@@ -16,7 +19,6 @@ Start server:
 ```sh
 yarn run dev
 ```
-
 
 ## Directory Structure
 
