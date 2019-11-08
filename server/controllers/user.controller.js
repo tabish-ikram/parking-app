@@ -49,12 +49,10 @@ function signin(req, res) {
 }
 
 function signal(req, res) {
-  console.log(req);
-  Car.findByIdAndUpdate(req.body.id, {
-    flag: req.body.flag
-  }, {new: true})
-  .then(note => {
-    if(!note) {
+  console.log(req.body);
+  Car.findOne({ id: req.body.id }, (err, record) => {
+    console.log('record>>>>', record);
+    if(!record) {
       const newRecord = new Car({
         id: req.body.id,
         flag: req.body.flag
@@ -66,7 +64,19 @@ function signal(req, res) {
         res.json({ success: true, msg: "Successful created new car." });
       });
     }
-    res.send(note);
+    else {
+      Car.findByIdAndUpdate(record._id,req.body,{new:true})   
+      .then((docs)=>{
+        if(docs) {
+          res.json({success:true, data:docs});
+        } else {
+          res.json({success:false,data:"no such user exist"});
+        }
+    }).catch((err)=>{
+      //  reject(err);
+      res.json({ success: true, msg: err });
+    })
+  }
   }).catch(err => {
     if(err.kind === 'ObjectId') {
       const newRecord = new Car({
