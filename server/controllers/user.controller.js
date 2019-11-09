@@ -93,7 +93,6 @@ function signal(req, res) {
   });
 
   
-
   // User.findOne({ name: req.body.name }, (err, user) => {
   //   if (err) throw err;
 
@@ -113,6 +112,18 @@ function signal(req, res) {
   //     });
   //   }
   // });
+}
+
+function getAllSignals(req, res) {
+  Car.find({}, (err, record) => {
+      if (err) throw err;
+
+      if (!record) {
+        return res.status(403).send({ success: false, msg: "Authentication failed. User not found." });
+      } else {
+        res.json({ success: true, msg: record });
+      }
+    });
 }
 
 /**
@@ -149,4 +160,4 @@ function getToken(headers) {
   }
 }
 
-export default { signin, signup, getUser, signal };
+export default { signin, signup, getUser, signal, getAllSignals };

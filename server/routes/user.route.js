@@ -13,6 +13,8 @@ router.post("/signin", userCtrl.signin);
 
 router.put("/signal", userCtrl.signal);
 
+router.get("/allsignals", userCtrl.getAllSignals);
+
 /** GET /api/v1/user/profile */
 router.get("/profile", passport.authenticate("jwt", { session: false }), userCtrl.getUser);
 
